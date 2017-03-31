@@ -337,6 +337,21 @@ module WxPay
           }.merge(options)
         )
       end
+
+      def generate_qrcode_url(product_id)
+				params=Hash.new
+	      params[:appid]=WxPay.appid
+	      params[:mch_id]=WxPay.mch_id
+	      params[:product_id]=product_id
+	      params[:time_stamp]=Time.now.to_i.to_s
+	      params[:nonce_str]=SecureRandom.uuid.tr('-', '')
+	      params[:sign]=WxPay::Sign::generate(params)
+	      params_str=params.map do |k,v|
+		      "#{k}=#{v}" if v.to_s!=''
+	      end.compact.join("&")
+
+	      "weixin//wxpay/bizpayurl?#{params_str}"
+      end
     end
   end
 end

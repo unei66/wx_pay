@@ -51,4 +51,8 @@ class ServiceTest < MiniTest::Test
     xml_str = '<xml><body>测试商品</body><out_trade_no>test003</out_trade_no><total_fee>1</total_fee><spbill_create_ip>127.0.0.1</spbill_create_ip><notify_url>http://making.dev/notify</notify_url><trade_type>JSAPI</trade_type><openid>OPENID</openid><app_id>app_id</app_id><mch_id>mch_id</mch_id><sign>172A2D487A37D13FDE32B874BA823DD6</sign></xml>'
     assert_equal xml_str, WxPay::Service.send(:make_payload, params)
   end
+
+	def test_generate_qrcode_url
+		p WxPay::Service.send(:generate_qrcode_url,123)
+	end
 end
