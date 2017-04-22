@@ -31,7 +31,8 @@ module WxPay
         appid: options.delete(:appid) || WxPay.appid,
         mch_id: options.delete(:mch_id) || WxPay.mch_id,
         key: options.delete(:key) || WxPay.key,
-        nonce_str: SecureRandom.uuid.tr('-', '')
+        nonce_str: SecureRandom.uuid.tr('-', ''),
+        notify_url:options.delete(:notify_url)||WxPay.notify_url
       }.merge(params)
 
       check_required_options(params, INVOKE_UNIFIEDORDER_REQUIRED_FIELDS)
